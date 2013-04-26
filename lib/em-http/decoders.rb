@@ -100,6 +100,7 @@ module EventMachine::HttpDecoders
       @buf ||= LazyStringIO.new
       @buf << compressed
 
+      puts "buffer size: #{@buf.size}"
       # Zlib::GzipReader loads input in 2048 byte chunks
       if @buf.size > 2048
         @gzip ||= Zlib::GzipReader.new @buf
