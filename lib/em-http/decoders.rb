@@ -100,20 +100,11 @@ module EventMachine::HttpDecoders
       @buf ||= LazyStringIO.new
       @buf << compressed
 
-      decomp = nil
-
       # Zlib::GzipReader loads input in 2048 byte chunks
-      puts @buf.size
-      while @buf.size > 2048
+      if @buf.size > 2048
         @gzip ||= Zlib::GzipReader.new @buf
-        if decomp
-          decomp << @gzip.readline
-        else
-          decomp = @gzip.readline
-        end
+        @gzip.readline
       end
-
-      decomp
     end
 
     def finalize
