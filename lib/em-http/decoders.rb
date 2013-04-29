@@ -103,7 +103,6 @@ module EventMachine::HttpDecoders
       decomp = nil
 
       # Zlib::GzipReader loads input in 2048 byte chunks
-      puts @buf.size
       while @buf.size > 2048
         @gzip ||= Zlib::GzipReader.new @buf
         if decomp
